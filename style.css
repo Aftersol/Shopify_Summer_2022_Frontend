@@ -1,0 +1,137 @@
+body
+{
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    margin:0;
+
+    background-image: url("seamless\ space_0.png");
+    background-repeat: repeat;
+}
+
+.welcome-banner
+{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(240, 240, 240);
+}
+
+.welcome-banner #welcome
+{
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+.welcome-banner #instructions
+{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.query-form
+{
+
+    display:flex;
+    flex-direction: row;
+
+    justify-content: space-evenly;
+
+    background-color: rgb(45, 45, 136);
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    font-size: 2rem;
+
+    padding:1rem;
+}
+
+.query-form label
+{
+    color: white;
+}
+
+.query-form input
+{
+    padding:.5rem;
+    
+    border-radius: 1rem;
+}
+
+.query-form button
+{
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    padding:.5rem;
+
+    border-radius: 1rem;
+
+}
+
+.viewport
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+
+}
+
+.viewport .box
+{
+    background-color: rgb(180, 196, 230);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 1.5rem;
+    padding: 1.5rem;
+
+    border-radius: 2rem;
+    border-width: 1px;
+    border-style: solid;
+
+    max-width: 25%;
+}
+
+.viewport .box picture img
+{
+    border-radius: 2rem;
+
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.viewport p#date
+{
+    color: grey;
+
+    font-weight: bold;
+}
+
+.viewport p.caption
+{
+    color: white;
+
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.like
+{
+    text-align: left;
+}
+
+.like button
+{
+    font-size: 2rem;
+}
+
+.loading-text
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    
+    color: white;
+}

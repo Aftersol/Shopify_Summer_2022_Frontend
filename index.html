@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <title>Query Some Data</title>
+
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+
+    <body>
+
+        <div class="welcome-banner"><p id="welcome">Welcome to the site for searching EPIC Photos!</p><p id="instructions">Enter the start and end date, then press query to search images.</p></div>
+        
+        <form id="query-form" class="query-form" action="#" method="get">        
+            <label for="start">Start Date</label>
+            <input id="startDate" type="date" min="2015-02-11" value="2016-02-11">
+            <label for="end">End Date</label>
+            <input id="endDate" type="date" min="2015-02-11" value="2016-02-12">
+            <button type="submit" onclick="">Query</button>
+        </form>
+
+        <p id="loading-text" class="loading-text"></p>
+
+        <div id="viewport" class="viewport">
+
+            <div class="box">
+                <picture>
+                    <img src="stub.png">
+                </picture>
+
+                <div class="description">
+                    <p id="date">2021-09-01</p>
+                    <p class="caption">This world is mine pl0x.</p>
+                </div>
+
+                <div class="like-btn">
+                    <button id="like" type="button">Like</button>
+                </div>
+            </div>
+
+            <div class="box">
+                <picture>
+                    <img src="spacesuit.jpg">
+                </picture>
+
+                <div class="description">
+                    <p id="date">2021-09-01</p>
+                    <p class="caption">Welcome to the future.</p>
+                </div>
+
+                <div class="like-btn">
+                    <button id="like" type="button">Like</button>
+                </div>
+            </div>
+
+            <div class="box">
+                <picture>
+                    <img src="moon.jpg">
+                </picture>
+
+                <div class="description">
+                    <p id="date">2021-09-01</p>
+                    <p class="caption">DA MOON EZ</p>
+                </div>
+
+                <div class="like-btn">
+                    <button id="like" type="button">Like</button>
+                </div>
+            </div>
+            
+            
+        </div>
+        <script src="query.js"></script>
+    </body>
+
+</html>
