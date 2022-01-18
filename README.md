@@ -6,4 +6,4 @@ A website demonstrating downloading images with the like system
 
 To run this code using XAMPP, put all the files into
 
-    %your_xampp_installation%\htdocs
+    %your_xampp_installation%/htdocs
