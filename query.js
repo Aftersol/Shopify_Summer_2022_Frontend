@@ -16,8 +16,8 @@ async function query(strStartDate, strEndDate)
     document.querySelector("#loading-text").innerHTML = "Please wait . . .";
     document.querySelector("#viewport").innerHTML = "";
 
-    startDate = Date.parse(strStartDate);
-    endDate = Date.parse(strEndDate);
+    var startDate = Date.parse(strStartDate);
+    var endDate = Date.parse(strEndDate);
 
     /* Check if an object is an date */
     if (isNaN(startDate) || isNaN(endDate))
@@ -32,8 +32,8 @@ async function query(strStartDate, strEndDate)
         return;
     }
 
-    launchDate = new Date(Date.UTC(2015,2,15,23,03,42));
-    today = new Date(Date.now())
+    var launchDate = new Date(Date.UTC(2015,2,15));
+    var today = new Date(Date.now())
 
     if (startDate < launchDate)
     {
