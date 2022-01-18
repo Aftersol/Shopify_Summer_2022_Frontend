@@ -29,7 +29,7 @@ function query(strStartDate, strEndDate)
     if (startDate > today)
     {
         document.querySelector("#loading-text").innerHTML = "You cannot search for images beyond today";
-		return;
+	return;
     }
     if (endDate > today)
     {
