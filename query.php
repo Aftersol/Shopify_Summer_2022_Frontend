@@ -65,7 +65,7 @@ function sendAPIQuery($strStartDate, $strEndDate)
 
     
             $htmlString .= <<<EOD
-                "<div class="box">
+                <div class="box">
                     <picture>
                         <img src="$destination">
                     </picture>
@@ -76,9 +76,9 @@ function sendAPIQuery($strStartDate, $strEndDate)
                     </div>
     
                     <div class="like-btn">
-                        <button>Like</button>
+                        <button id="like" type="button">Like</button>
                     </div>
-                </div>"
+                </div>
                 EOD;
 
             $counter = $counter + 1;
