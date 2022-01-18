@@ -43,7 +43,7 @@ function sendAPIQuery($strStartDate, $strEndDate)
     {
         $endDate = $today;
     }
-	//echo $strStartDate.' '.$startDate.' '.$today;
+
     $currentDate = $startDate;
 
 	$imageCounter = 0;
