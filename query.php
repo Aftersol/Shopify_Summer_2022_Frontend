@@ -1,5 +1,10 @@
 <?php
 
+function errorCode($errorString)
+{
+	return "<p class='error-code'>".$errorString."</p>";
+}
+
 #Pass both dates as string
 function sendAPIQuery($strStartDate, $strEndDate)
 {
@@ -9,7 +14,7 @@ function sendAPIQuery($strStartDate, $strEndDate)
 
     if (!is_string($strStartDate) || !is_string($strEndDate))
     {
-        echo "<p class="error-code">Invaild date submitted to server</p>";
+        echo errorCode("Invaild date submitted to server");
         return;
     }
 
@@ -19,13 +24,13 @@ function sendAPIQuery($strStartDate, $strEndDate)
 
     if ($startDate > $endDate)
     {
-        echo "<p class="error-code">Start date must not be later than end date</p>";
+        echo errorCode("Start date must not be later than end date");
         return;
     }
 	
     if ($startDate > $today)
     {
-        echo "<p class="error-code">The start date submitted to the server must not be searched beyond today's date</p>";
+        echo errorCode("The start date submitted to the server must not be searched beyond today's date");
         return;
     }
 
@@ -41,6 +46,7 @@ function sendAPIQuery($strStartDate, $strEndDate)
 	//echo $strStartDate.' '.$startDate.' '.$today;
     $currentDate = $startDate;
 
+	$imageCounter = 0;
     while ($currentDate <= $endDate)
     {
 		# Based on NASA example API Code for EPIC image search
@@ -54,6 +60,7 @@ function sendAPIQuery($strStartDate, $strEndDate)
     
         $counter = 1;
         foreach($arr as $item) {
+			$imageCounter = $imageCounter + 1;
             $name = $item->image.'.jpg';
             $description = $item->caption;
             $archive = "https://epic.gsfc.nasa.gov/archive/natural/{$year}/{$month}/{$day}/jpg/";
@@ -94,8 +101,16 @@ function sendAPIQuery($strStartDate, $strEndDate)
 
         $currentDate = date("Y-m-d", strtotime($currentDate. ' + 1 days'));
     }
-
-    echo $htmlString;
+	
+	if ($imageCounter == 0)
+	{
+		echo errorCode("No images found from NASA's server");
+	}
+	else
+	{
+		echo $htmlString;
+	}
+    
 }
 
 
