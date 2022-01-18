@@ -9,7 +9,7 @@ function sendAPIQuery($strStartDate, $strEndDate)
 
     if (!is_string($strStartDate) || !is_string($strEndDate))
     {
-        echo "Invaild date submitted to server";
+        echo "<p class="error-code">Invaild date submitted to server</p>";
         return;
     }
 
@@ -19,7 +19,13 @@ function sendAPIQuery($strStartDate, $strEndDate)
 
     if ($startDate > $endDate)
     {
-        echo "Start date must not be later than end date";
+        echo "<p class="error-code">Start date must not be later than end date</p>";
+        return;
+    }
+	
+    if ($startDate > $today)
+    {
+        echo "<p class="error-code">The start date submitted to the server must not be searched beyond today's date</p>";
         return;
     }
 
@@ -37,6 +43,7 @@ function sendAPIQuery($strStartDate, $strEndDate)
 
     while ($currentDate <= $endDate)
     {
+		# Based on NASA example API Code for EPIC image search
         $year = date('Y', strtotime($currentDate));
         $month = date('m', strtotime($currentDate));
         $day = date('d', strtotime($currentDate));
