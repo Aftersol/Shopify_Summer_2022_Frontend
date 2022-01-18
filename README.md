@@ -6,4 +6,6 @@ A website demonstrating downloading images with the like system
 
 To run this code using XAMPP, put all the files into
 
-    %your_xampp_installation%/htdocs
+    %your_xampp_installation%\htdocs
+	
+To run this code at sandbox: [CodeSandbox](https://codesandbox.io/s/friendly-hoover-21fx3)
