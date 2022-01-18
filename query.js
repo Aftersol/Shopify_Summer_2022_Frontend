@@ -1,4 +1,17 @@
-function query(strStartDate, strEndDate)
+async function sendPHPRequest(strStartDate,strEndDate)
+{
+	return 	fetch("query.php",
+	{
+		method: "POST",
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+		},body: `startDate=${strStartDate}&endDate=${strEndDate}`
+	})
+	.then((response) => response.text())
+	.then((res) => (document.querySelector("#viewport").innerHTML = res));
+}
+
+async function query(strStartDate, strEndDate)
 {
     document.querySelector("#loading-text").innerHTML = "Please wait . . .";
     document.querySelector("#viewport").innerHTML = "";
@@ -29,35 +42,61 @@ function query(strStartDate, strEndDate)
     if (startDate > today)
     {
         document.querySelector("#loading-text").innerHTML = "You cannot search for images beyond today";
-	return;
+		return;
     }
     if (endDate > today)
     {
         endDate = today;
     }
     
-    try
-    {
-
-
-        fetch("query.php",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-            },body: `startDate=${strStartDate}&endDate=${strEndDate}`
-        })
-        .then((response) => response.text())
-        .then((res) => (document.querySelector("#viewport").innerHTML = res));
-
-    }
-    catch
-    {
-        document.querySelector("#loading-text").innerHTML = "Cannot fetch from server";
-        return;
-    }
+	await sendPHPRequest(strStartDate,strEndDate);
 
     document.querySelector("#loading-text").innerHTML = "";
+	
+	var boxes = document.getElementsByClassName("box");
+    for (var like = 0; like < boxes.length; like++)
+    {
+        console.log(boxes[like], like);
+
+        var date = boxes[like].querySelector("#date").innerHTML;
+        console.log(date);
+
+		if (localStorage.getItem(date) === "false" || localStorage.getItem(date) === null)
+		{   
+			boxes[like].querySelector("#like").innerHTML = "Like";
+		}
+		else
+		{
+			boxes[like].querySelector("#like").innerHTML = "Liked";
+		}
+    }
+}
+
+function saveLikes(myDate)
+{
+	var boxes = document.getElementsByClassName("box");
+    for (var like = 0; like < boxes.length; like++)
+    {
+
+        var date = boxes[like].querySelector("#date").innerHTML;
+		if (date === myDate)
+		{
+			var hasBeenLiked=localStorage.getItem(date);
+			if (localStorage.getItem(date) === "false" || localStorage.getItem(date) === null)
+			{   
+				localStorage.setItem(date, true);
+				boxes[like].querySelector("#like").innerHTML = "Liked";
+
+			}
+			else
+			{
+				localStorage.setItem(date, false);
+				boxes[like].querySelector("#like").innerHTML = "Like";
+			}		
+			
+			break;
+		}
+    }
 }
 
 window.addEventListener("load", function()
@@ -71,26 +110,5 @@ window.addEventListener("load", function()
         query(passedStartDate, passedEndDate);
     });
 
-    var boxes = document.getElementsByClassName("box");
-    for (var like = 0; like < boxes.length; like++)
-    {
-        console.log(boxes[like], like);
 
-        var date = boxes[like].querySelector("#date").innerHTML;
-        console.log(date);
-
-        boxes[like].querySelector("#like").addEventListener("submit", function (likeButton) {
-            if (localStorage.getItem(date, false))
-            {   
-                localStorage.setItem(date, true);
-                boxes[like].querySelector("#like").innerHTML = "Liked";
-
-            }
-            else
-            {
-                localStorage.setItem(date, false);
-                boxes[like].querySelector("#like").innerHTML = "Like";
-            }
-        });
-    }
 })

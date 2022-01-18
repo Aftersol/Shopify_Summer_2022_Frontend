@@ -76,7 +76,7 @@ function sendAPIQuery($strStartDate, $strEndDate)
                     </div>
     
                     <div class="like-btn">
-                        <button id="like" type="button">Like</button>
+                        <button id="like" onclick="saveLikes('${year}-${month}-${day} #{$counter}')" type="button">Like</button>
                     </div>
                 </div>
                 EOD;
