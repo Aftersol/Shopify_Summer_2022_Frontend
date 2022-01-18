@@ -6,14 +6,15 @@ function sendAPIQuery($strStartDate, $strEndDate)
     $htmlString = "";
     $launchDate = date("Y-m-d",strtotime("2015-02-11"));
     $today = gmdate("Y-m-d");
+
     if (!is_string($strStartDate) || !is_string($strEndDate))
     {
         echo "Invaild date submitted to server";
         return;
     }
 
-    $startDate = date("Y-h-d", strtotime($strStartDate));
-    $endDate = date("Y-h-d", strtotime($strEndDate));
+    $startDate = date("Y-m-d", strtotime($strStartDate));
+    $endDate = date("Y-m-d", strtotime($strEndDate));
 
 
     if ($startDate > $endDate)
@@ -27,18 +28,18 @@ function sendAPIQuery($strStartDate, $strEndDate)
         $startDate = $launchDate;
     }
 
-    if ($endDate > $today("Y-m-d")) # Make sure they don't go past today's
+    if ($endDate > $today) # Make sure they don't go past today's
     {
-        $endDate = $today("Y-m-d");
+        $endDate = $today;
     }
-
+	//echo $strStartDate.' '.$startDate.' '.$today;
     $currentDate = $startDate;
 
     while ($currentDate <= $endDate)
     {
-        $year = strtotime('Y', $startDate);
-        $month = strtotime('M', $startDate);
-        $day = strtotime('D', $startDate);
+        $year = date('Y', strtotime($currentDate));
+        $month = date('m', strtotime($currentDate));
+        $day = date('d', strtotime($currentDate));
 
         $metadata = "https://epic.gsfc.nasa.gov/api/natural/date/{$year}-{$month}-{$day}";
         $meta = file_get_contents($metadata);
@@ -51,10 +52,17 @@ function sendAPIQuery($strStartDate, $strEndDate)
             $archive = "https://epic.gsfc.nasa.gov/archive/natural/{$year}/{$month}/{$day}/jpg/";
     
             $source = $archive.$name;
-            $destination = "/epic/images/{$year}/{$month},{$day}".$name;
+            $destination = "epic/images/{$year}/{$month}/{$day}/".$name;
     
-            if(!file_exists($destination)) # Do not download NASA Images if the server already has the images
-                copy($source, $destination);    # Download and copy the image if the file doesn't exist in the server
+            if(!file_exists($destination))# Do not download NASA Images if the server already has the images
+			{
+				if (!file_exists("epic/images/{$year}/{$month}/{$day}"))
+				{
+					mkdir("epic/images/{$year}/{$month}/{$day}",0222,true);
+				}
+				copy($source, $destination);    # Download and copy the image if the file doesn't exist in the server
+			}
+
     
             $htmlString .= <<<EOD
                 "<div class="box">
@@ -75,8 +83,9 @@ function sendAPIQuery($strStartDate, $strEndDate)
 
             $counter = $counter + 1;
         }
+		usleep(100000);
 
-        $currentDate = date("Y-m-d", strtotime($startDate. ' + 1 days'));
+        $currentDate = date("Y-m-d", strtotime($currentDate. ' + 1 days'));
     }
 
     echo $htmlString;

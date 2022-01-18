@@ -15,7 +15,7 @@ function query(strStartDate, strEndDate)
 
     if (startDate > endDate)
     {
-        document.querySelector("#loading-text").innerHTML = "The start date be later than the end date";
+        document.querySelector("#loading-text").innerHTML = "The start date cannot be later than the end date";
         return;
     }
 
@@ -26,7 +26,11 @@ function query(strStartDate, strEndDate)
     {
         startDate = launchDate;
     }
-
+    if (startDate > today)
+    {
+        document.querySelector("#loading-text").innerHTML = "You cannot search for images beyond today";
+		return;
+    }
     if (endDate > today)
     {
         endDate = today;
@@ -34,17 +38,9 @@ function query(strStartDate, strEndDate)
     
     try
     {
-        /*fetch("query.php",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-            },body: `startDate=${strStartDate}&endDate=${strEndDate}`
-        })
-        .then((response) => response.text())
-        .then((res) => (document.getElementById("viewport").innerHTML = res));*/
 
-        fetch("test.php",
+
+        fetch("query.php",
         {
             method: "POST",
             headers: {
@@ -61,21 +57,7 @@ function query(strStartDate, strEndDate)
         return;
     }
 
-    /*document.getElementById("loading-text").innerHTML = "";
-
-    var boxes = document.getElementsByClassName("box");
-
-    for (var box = 0; box < boxes.length; box++)
-    {
-        if (localStorage.getElementById("date") = true)
-        {
-            boxes[box].getElementById("like").innerHTML = "Liked";
-        }
-        else
-        {
-            boxes[box].getElementById("like").innerHTML = "Like";
-        }
-    }*/
+    document.querySelector("#loading-text").innerHTML = "";
 }
 
 window.addEventListener("load", function()
