@@ -7,7 +7,7 @@ body
 
     margin:0;
 
-    background-image: url("assets/space_background.png");
+    background-image: url("space_background.png");
     background-repeat: repeat;
 }
 
@@ -117,14 +117,21 @@ body
     font-size: 1.5rem;
 }
 
-.like
+.like-btn
 {
     text-align: left;
 }
 
-.like button
+.like-btn button
 {
-    font-size: 2rem;
+    font-size: 1rem;
+	font-weight: bold;
+	color: blue;
+	
+	border-radius: 0;
+	border-style: none;
+	border-radius: 2rem;
+	padding: 1rem;
 }
 
 .loading-text
