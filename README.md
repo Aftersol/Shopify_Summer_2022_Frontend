@@ -8,8 +8,6 @@ To run this code using XAMPP, put all the files into
 
     %your_xampp_installation%\htdocs
 	
-To run this code: [here](https://aftersol-challenge-summer-2022.000webhostapp.com/)
-
 
 ## Source
  - [Earth: The 6th Picture (2016/02/11)](https://epic.gsfc.nasa.gov/?date=2016-02-11)
